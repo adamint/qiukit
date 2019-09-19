@@ -1,0 +1,5 @@
+Structures
+
+For, while, if, else, ternary, end statement, close parenthesis, continue, break, else if, for in range (inclusive), for in range (exclusive), Lists
+
+
