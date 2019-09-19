@@ -2,8 +2,8 @@ import javax.swing.*;
 
 public class BoatViewer {
     public static void main(String[] args) {
-        int width = 300;
-        int height = 300;
+        int width = 500;
+        int height = 500;
 
         JFrame jframe = new JFrame();
         jframe.setVisible(true);
