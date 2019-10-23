@@ -1,6 +1,6 @@
 package com.adamratzman.qiukit.operators;
 
-import com.adamratzman.qiukit.Qubit;
+import com.adamratzman.qiukit.qubit.Qubit;
 
 import java.util.Random;
 

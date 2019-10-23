@@ -1,6 +1,7 @@
 package com.adamratzman.qiukit;
 
 import com.adamratzman.qiukit.operators.unary.Hadamard;
+import com.adamratzman.qiukit.qubit.Qubit;
 
 import java.util.Random;
 

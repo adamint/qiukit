@@ -1,4 +1,4 @@
-package com.adamratzman.qiukit;
+package com.adamratzman.qiukit.qubit;
 
 import org.apache.commons.math3.complex.Complex;
 
