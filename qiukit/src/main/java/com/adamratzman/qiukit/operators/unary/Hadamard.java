@@ -1,11 +1,10 @@
 package com.adamratzman.qiukit.operators.unary;
 
-import com.adamratzman.qiukit.qubit.Qubit;
 import com.adamratzman.qiukit.operators.QubitUnaryOperator;
+import com.adamratzman.qiukit.qubit.Qubit;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Hadamard extends QubitUnaryOperator<Qubit> {
@@ -17,7 +16,7 @@ public class Hadamard extends QubitUnaryOperator<Qubit> {
   );
 
   public Hadamard(Random random) {
-    super(random);
+    super("Hadamard", random);
   }
 
   @Override
@@ -25,7 +24,6 @@ public class Hadamard extends QubitUnaryOperator<Qubit> {
     RealMatrix result = hadamardMatrix
             .multiply(MatrixUtils.createRealMatrix(argument.getAsMatrix()))
             .scalarMultiply(1.0 / Math.sqrt(2));
-    System.out.println(Arrays.deepToString(result.getData()));
-    return null;
+    return new Qubit(result.getData(), argument.getRandom());
   }
 }

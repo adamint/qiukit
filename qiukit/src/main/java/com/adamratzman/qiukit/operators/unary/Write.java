@@ -8,14 +8,14 @@ import java.util.Random;
 
 public class Write extends QubitBinaryOperator<Qubit, Qubit.State> {
   public Write(Random random) {
-    super(random);
+    super("Write", random);
   }
 
   @Override
   public Qubit evaluate(Qubit qubit, Qubit.State qubitState) {
     Qubit readQubit = qubit.read();
-    if ((qubitState == Qubit.State.ZERO && readQubit.isOne())
-            || (qubitState == Qubit.State.ONE && readQubit.isZero())) {
+    if ((qubitState == Qubit.State.ZERO && readQubit.is(Qubit.State.ONE))
+            || (qubitState == Qubit.State.ONE && readQubit.is(Qubit.State.ZERO))) {
       return readQubit.not();
     } else return readQubit;
   }

@@ -9,8 +9,7 @@ import org.apache.commons.math3.complex.Complex;
 import java.util.Random;
 
 public class Qubit {
-  private QubitVector zeroVector;
-  private QubitVector oneVector;
+  private Complex complexRepresentation;
   private Random random;
 
   private Read read;
@@ -18,15 +17,22 @@ public class Qubit {
   private Not not;
   private Write write;
 
-  public Qubit(QubitVector zeroVector, QubitVector oneVector, Random random) {
-    this.zeroVector = zeroVector;
-    this.oneVector = oneVector;
+  public Qubit(Complex complexRepresentation, Random random) {
+    this.complexRepresentation = complexRepresentation;
     this.random = random;
 
     this.read = new Read(random);
     this.hadamard = new Hadamard(random);
     this.not = new Not(random);
     this.write = new Write(random);
+  }
+
+  public Qubit(double real, double imaginary, Random random) {
+    this(new Complex(real, imaginary), random);
+  }
+
+  public Qubit(double[][] matrix, Random random) {
+    this(matrix[0][0], matrix[1][0], random);
   }
 
   public Qubit read() {
@@ -45,20 +51,8 @@ public class Qubit {
     return write.evaluate(this, state);
   }
 
-  public QubitVector getOneVector() {
-    return oneVector;
-  }
-
-  public void setOneVector(QubitVector oneVector) {
-    this.oneVector = oneVector;
-  }
-
-  public QubitVector getZeroVector() {
-    return zeroVector;
-  }
-
-  public void setZeroVector(QubitVector zeroVector) {
-    this.zeroVector = zeroVector;
+  public Complex getComplexRepresentation() {
+    return complexRepresentation;
   }
 
   public Random getRandom() {
@@ -66,7 +60,7 @@ public class Qubit {
   }
 
   public double[] getAsVector() {
-    return new double[]{zeroVector.getMagnitude(), oneVector.getMagnitude()};
+    return new double[]{getZero(), getOne()};
   }
 
   public double[][] getAsMatrix() {
@@ -74,26 +68,44 @@ public class Qubit {
     return new double[][]{new double[]{vector[0]}, new double[]{vector[1]}};
   }
 
-  public boolean isZero() {
-    return getZeroVector().getProbability() == 1.0;
+  public boolean is(State state) {
+    return getProbability(state) == 1.0;
   }
 
-  public boolean isOne() {
-    return getOneVector().getProbability() == 1.0;
+  public double getZero() {
+    return complexRepresentation.getReal();
   }
 
-  public static Qubit getZero(Random random) {
-    return new Qubit(
-            new QubitVector(new Complex(1.0)),
-            new QubitVector(new Complex(0.0)),
+  public double getOne() {
+    return complexRepresentation.getImaginary();
+  }
+
+  public double getProbability(State state) {
+    double coefficient;
+    if (state == State.ZERO) coefficient = getZero();
+    else coefficient = getOne();
+    return Math.pow(coefficient, 2.0);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Qubit(").append(getZero()).append(", ").append(getOne()).append(")");
+    return sb.toString();
+  }
+
+  public static Qubit getQubit(State state) {
+    return getQubit(state, new Random());
+  }
+
+  public static Qubit getQubit(State state, Random random) {
+    if (state == State.ZERO) return new Qubit(
+            new Complex(1.0),
             random);
-  }
-
-  public static Qubit getOne(Random random) {
-    return new Qubit(
-            new QubitVector(new Complex(0.0)),
-            new QubitVector(new Complex(1.0)),
+    else if (state == State.ONE) return new Qubit(
+            new Complex(0, 1.0),
             random);
+    else throw new IllegalArgumentException();
   }
 
   public enum State {

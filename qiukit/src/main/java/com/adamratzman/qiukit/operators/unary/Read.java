@@ -7,15 +7,15 @@ import java.util.Random;
 
 public class Read extends QubitUnaryOperator<Qubit> {
   public Read(Random random) {
-    super(random);
+    super("Read", random);
   }
 
   @Override
   public Qubit evaluate(Qubit argument) {
-    double oneProbability = argument.getOneVector().getProbability();
+    double oneProbability = argument.getProbability(Qubit.State.ONE);
 
-    if (argument.getRandom().nextDouble() < oneProbability) return Qubit.getOne(argument.getRandom());
-    else return Qubit.getZero(argument.getRandom());
+    if (argument.getRandom().nextDouble() < oneProbability) return Qubit.getQubit(Qubit.State.ONE, argument.getRandom());
+    else return Qubit.getQubit(Qubit.State.ZERO, argument.getRandom());
 
   }
 }
