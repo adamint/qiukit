@@ -2,7 +2,6 @@ package com.adamratzman.qiukit;
 
 import com.adamratzman.qiukit.library.QiukitLibrary;
 import com.adamratzman.qiukit.operators.unary.Hadamard;
-import com.adamratzman.qiukit.qubit.Qubit;
 
 import java.util.Random;
 
@@ -11,5 +10,11 @@ public class Qiukit {
   public static void main(String[] args) {
     System.out.println(QiukitLibrary.generateRandomQubit(random));
     System.out.println(new Hadamard(random).evaluate(Qubit.getQubit(Qubit.State.ZERO, random)));
+    Qubit zero = Qubit.getQubit(Qubit.State.ZERO);
+    System.out.println(zero);
+    System.out.println(zero.phase(Math.PI / 4));
+    System.out.println(zero.phase(Math.PI / 2));
+    System.out.println(zero.phase(Math.PI * 3 / 4));
+    System.out.println(zero.phase(Math.PI));
   }
 }

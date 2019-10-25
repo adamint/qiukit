@@ -1,6 +1,6 @@
 package com.adamratzman.qiukit.operators;
 
-import com.adamratzman.qiukit.qubit.Qubit;
+import com.adamratzman.qiukit.Qubit;
 import javafx.util.Pair;
 
 import java.util.List;

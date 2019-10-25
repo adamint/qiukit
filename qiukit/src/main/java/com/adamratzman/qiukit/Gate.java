@@ -1,23 +1,31 @@
 package com.adamratzman.qiukit;
 
 import com.adamratzman.qiukit.operators.QubitOperator;
-import com.adamratzman.qiukit.qubit.Qubit;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Gate<E, T> {
+public class Gate<E, T> extends Circuit {
   private List<Qubit> qubits;
   private QubitOperator<Qubit, T> qubitOperator;
 
   public Gate(List<Qubit> qubits, QubitOperator<Qubit, T> qubitOperator) {
+    super(new ArrayList<>());
     this.qubits = qubits;
     this.qubitOperator = qubitOperator;
+    addCircuit(this);
   }
 
-  ComputationalResult<E, T> invoke(E before) {
+  private ComputationalResult<E, T> invoke(E before) {
     T after = qubitOperator.apply(qubits);
 
     return new ComputationalResult<>(before, after);
+  }
+
+  @Override
+  public List<ComputationalResult> evaluate(Object initial) {
+    return Collections.singletonList(invoke((E) initial));
   }
 
   @Override

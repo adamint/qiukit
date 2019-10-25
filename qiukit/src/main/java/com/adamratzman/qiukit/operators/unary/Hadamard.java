@@ -1,7 +1,7 @@
 package com.adamratzman.qiukit.operators.unary;
 
 import com.adamratzman.qiukit.operators.QubitUnaryOperator;
-import com.adamratzman.qiukit.qubit.Qubit;
+import com.adamratzman.qiukit.Qubit;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 

@@ -1,8 +1,8 @@
-package com.adamratzman.qiukit.operators.unary;
+package com.adamratzman.qiukit.operators.binary;
 
 
 import com.adamratzman.qiukit.operators.QubitBinaryOperator;
-import com.adamratzman.qiukit.qubit.Qubit;
+import com.adamratzman.qiukit.Qubit;
 
 import java.util.Random;
 
