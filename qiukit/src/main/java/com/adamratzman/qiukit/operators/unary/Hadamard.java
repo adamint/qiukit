@@ -1,17 +1,19 @@
 package com.adamratzman.qiukit.operators.unary;
 
-import com.adamratzman.qiukit.operators.QubitUnaryOperator;
 import com.adamratzman.qiukit.Qubit;
+import com.adamratzman.qiukit.operators.QubitUnaryOperator;
+import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.linear.FieldMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.RealMatrix;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Hadamard extends QubitUnaryOperator<Qubit> {
-  private RealMatrix hadamardMatrix = MatrixUtils.createRealMatrix(
-          new double[][]{
-                  new double[]{1, 1},
-                  new double[]{1, -1}
+  private FieldMatrix<Complex> hadamardMatrix = MatrixUtils.createFieldMatrix(
+          new Complex[][]{
+                  new Complex[]{new Complex(1), new Complex(1)},
+                  new Complex[]{new Complex(1), new Complex(-1)}
           }
   );
 
@@ -21,9 +23,9 @@ public class Hadamard extends QubitUnaryOperator<Qubit> {
 
   @Override
   public Qubit evaluate(Qubit argument) {
-    RealMatrix result = hadamardMatrix
-            .multiply(MatrixUtils.createRealMatrix(argument.getAsMatrix()))
-            .scalarMultiply(1.0 / Math.sqrt(2));
+    FieldMatrix<Complex> result = hadamardMatrix
+            .multiply(MatrixUtils.createFieldMatrix(argument.getAsComplexMatrix()))
+            .scalarMultiply(new Complex(1.0 / Math.sqrt(2)));
     return new Qubit(result.getData(), argument.getRandom());
   }
 }
