@@ -23,9 +23,8 @@ public class Hadamard extends QubitUnaryOperator<Qubit> {
 
   @Override
   public Qubit evaluate(Qubit argument) {
-    FieldMatrix<Complex> result = hadamardMatrix
-            .multiply(MatrixUtils.createFieldMatrix(argument.getAsComplexMatrix()))
-            .scalarMultiply(new Complex(1.0 / Math.sqrt(2)));
-    return new Qubit(result.getData(), argument.getRandom());
+    Complex zero = argument.getZero().getComplex().add(argument.getOne().getComplex()).multiply(1 / Math.sqrt(2));
+    Complex one = argument.getZero().getComplex().subtract(argument.getOne().getComplex()).multiply(1 / Math.sqrt(2));
+    return new Qubit(zero, one, argument.getRandom());
   }
 }

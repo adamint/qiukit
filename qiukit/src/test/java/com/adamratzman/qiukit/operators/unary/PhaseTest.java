@@ -7,7 +7,7 @@ public class PhaseTest {
   @Test
   public void evaluate() {
     System.out.println(Qubit.getQubit(Qubit.State.ZERO));
-    System.out.println(Qubit.getQubit(Qubit.State.ZERO).hadamard());
+    System.out.println(Qubit.getQubit(Qubit.State.ZERO).phase(Math.PI));
     System.out.println(Qubit.getQubit(Qubit.State.ONE));
     System.out.println(Qubit.getQubit(Qubit.State.ONE).hadamard());
   }

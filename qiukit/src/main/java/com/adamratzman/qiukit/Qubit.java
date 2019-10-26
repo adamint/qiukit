@@ -5,6 +5,8 @@ import com.adamratzman.qiukit.operators.binary.Write;
 import com.adamratzman.qiukit.operators.unary.Hadamard;
 import com.adamratzman.qiukit.operators.unary.Not;
 import com.adamratzman.qiukit.operators.unary.Read;
+import com.adamratzman.qiukit.operators.unary.RootOfNot;
+import com.adamratzman.qiukit.utils.MathUtils;
 import org.apache.commons.math3.complex.Complex;
 
 import java.util.Random;
@@ -20,6 +22,7 @@ public class Qubit {
   private Not not;
   private Write write;
   private Phase phase;
+  private RootOfNot rootOfNot;
 
   public Qubit(QubitAmplitude zeroAmplitude, QubitAmplitude oneAmplitude, Random random) {
     this.zeroAmplitude = zeroAmplitude;
@@ -31,10 +34,11 @@ public class Qubit {
     this.not = new Not(random);
     this.write = new Write(random);
     this.phase = new Phase(random);
+    this.rootOfNot = new RootOfNot(random);
   }
 
   public Qubit(Complex zero, Complex one, Random random) {
-    this(new QubitAmplitude(zero), new QubitAmplitude(one), random);
+    this(QubitAmplitude.fromComplex(zero), QubitAmplitude.fromComplex(one), random);
   }
 
   public Qubit(double realZero, double realOne, Random random) {
@@ -43,7 +47,7 @@ public class Qubit {
 
 
   public Qubit(Complex[][] matrix, Random random) {
-    this(new QubitAmplitude(matrix[0][0]), new QubitAmplitude(matrix[1][0]), random);
+    this( QubitAmplitude.fromComplex(matrix[0][0]),  QubitAmplitude.fromComplex(matrix[1][0]), random);
   }
 
   public static Qubit getQubit(State state) {
@@ -74,29 +78,8 @@ public class Qubit {
     return not.evaluate(this);
   }
 
-  public Qubit setPhase(State state, double phase) {
-    if (state == State.ZERO)
-      return new Qubit(new QubitAmplitude(zeroAmplitude.getReal(), Math.tan(phase) * zeroAmplitude.getReal()), oneAmplitude, random);
-    else
-      return new Qubit(zeroAmplitude, new QubitAmplitude(oneAmplitude.getReal(), Math.tan(phase) * zeroAmplitude.getReal()), random);
-  }
-
-  public Qubit addPhase(State state, double phaseToAdd) {
-    if (state == State.ZERO) return setPhase(State.ZERO, zeroAmplitude.getAngle() + phaseToAdd);
-    else return setPhase(State.ONE, oneAmplitude.getAngle() + phaseToAdd);
-  }
-
-  public Qubit addRelativePhase(double phaseToAdd) {
-    return addPhase(State.ONE, phaseToAdd);
-  }
-
-  public Qubit subtractRelativePhase(double phaseToRemove) {
-    return addRelativePhase(-phaseToRemove);
-  }
-
-  public double getPhase(State state) {
-    if (state == State.ZERO) return zeroAmplitude.getAngle();
-    else return oneAmplitude.getAngle();
+  public Qubit rootOfNot() {
+    return rootOfNot.evaluate(this);
   }
 
   public Qubit write(Qubit.State state) {

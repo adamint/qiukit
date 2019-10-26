@@ -23,5 +23,7 @@ public class HadamardTest {
     Qubit qubit = new Qubit(Math.sqrt(0.854), Math.sqrt(.146), random);
     Assert.assertNotEquals(qubit, qubit.hadamard());
     Assert.assertEquals(qubit, qubit.hadamard().hadamard());
+
+    System.out.println(one.hadamard());
   }
 }

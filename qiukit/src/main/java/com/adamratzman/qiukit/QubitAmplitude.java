@@ -2,36 +2,40 @@ package com.adamratzman.qiukit;
 
 import com.adamratzman.qiukit.utils.MathUtils;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.complex.ComplexUtils;
 
 public class QubitAmplitude {
-  private static double delta = 0.00001;
+  public static double delta = 0.00001;
 
-  private Complex amplitude;
+  private double r;
+  private double theta;
 
-  public QubitAmplitude(Complex amplitude) {
-    if (amplitude.getReal() >= 0) this.amplitude = new Complex(amplitude.getReal(), amplitude.getImaginary());
-    else
-      this.amplitude = new Complex(Math.abs(amplitude.getReal()), amplitude.getImaginary() + (Math.tan(Math.PI / 2) * amplitude.getReal()));
-  }
-
-  public QubitAmplitude(double real, double imaginary) {
-    this(new Complex(real, imaginary));
+  public QubitAmplitude(double r, double theta) {
+    this.r = r;
+    this.theta = theta;
+    while (this.theta >= Math.PI) this.theta -= Math.PI;
   }
 
   public Complex getComplex() {
-    return amplitude;
+    System.out.println("r " + r + " | theta " + theta + " | real " + (r * Math.cos(theta)));
+    Complex asComplex = ComplexUtils.polar2Complex(r, theta);
+    return new Complex(asComplex.getReal(), asComplex.getImaginary());
   }
 
   public double getReal() {
-    return amplitude.getReal();
+    return getComplex().getReal();
   }
 
   public double getImaginary() {
-    return amplitude.getImaginary();
+    return getComplex().getImaginary();
   }
 
   public double getAngle() {
-    return Math.atan2(Math.abs(amplitude.getImaginary()), Math.abs(amplitude.getReal()));
+    return theta;
+  }
+
+  public double getCoefficient() {
+    return r;
   }
 
   @Override
@@ -45,6 +49,13 @@ public class QubitAmplitude {
 
   @Override
   public String toString() {
-    return "QubitAmplitude(real=" + getReal() + ", imaginary=" + getImaginary() + ", phase=" + getAngle() + ")";
+    return "QubitAmplitude(real=" + getReal() + ", imaginary=" + getImaginary() + ", complex=" + getComplex() + ", phase=" + getAngle() + ")";
+  }
+
+  public static QubitAmplitude fromComplex(Complex complex) {
+    if (complex.getReal() < 0) {
+      return new QubitAmplitude(Math.sqrt(Math.pow(complex.getReal(), 2) + Math.pow(complex.getImaginary(), 2)), Math.PI / 2 + Math.atan2(complex.getImaginary(), Math.abs(complex.getReal())));
+    }
+    return new QubitAmplitude(Math.sqrt(Math.pow(complex.getReal(), 2) + Math.pow(complex.getImaginary(), 2)), Math.atan2(complex.getImaginary(), Math.abs(complex.getReal())));
   }
 }
