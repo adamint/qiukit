@@ -7,7 +7,10 @@ public class PhaseTest {
   @Test
   public void evaluate() {
     System.out.println(Qubit.getQubit(Qubit.State.ZERO).hadamard());
-    System.out.println(Qubit.getQubit(Qubit.State.ZERO).hadamard().phase(3 * Math.PI / 2));
-      System.out.println(Qubit.getQubit(Qubit.State.ZERO).hadamard().phaseDegrees(270).hadamard());
+    System.out.println(Qubit.getQubit(Qubit.State.ZERO).hadamard().phaseDegrees(90));
+    System.out.println(Qubit.getQubit(Qubit.State.ZERO).hadamard().phaseDegrees(90).hadamard());
+
+
+ //   System.out.println(Qubit.getQubit(Qubit.State.ZERO).hadamard().phaseDegrees(270).hadamard().hadamard());
   }
 }

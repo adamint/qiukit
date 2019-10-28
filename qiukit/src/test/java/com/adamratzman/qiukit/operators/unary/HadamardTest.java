@@ -21,11 +21,15 @@ public class HadamardTest {
             zero.hadamard()
     );
 
+    Assert.assertEquals(one, one.hadamard().hadamard());
+    Assert.assertEquals(
+            new Qubit(new QubitAmplitude(1 / Math.sqrt(2)), new QubitAmplitude(1 / Math.sqrt(2), Math.PI), random),
+            one.hadamard()
+    );
+
     Qubit qubit = new Qubit(Math.sqrt(0.854), Math.sqrt(.146), random);
     Assert.assertNotEquals(qubit, qubit.hadamard());
-    System.out.println(qubit);
-    Assert.assertEquals(qubit, qubit.hadamard().hadamard());
 
-    System.out.println(one.hadamard());
+    Assert.assertEquals(qubit, qubit.hadamard().hadamard());
   }
 }

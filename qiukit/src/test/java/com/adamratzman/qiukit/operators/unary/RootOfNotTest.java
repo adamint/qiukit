@@ -10,7 +10,7 @@ public class RootOfNotTest {
   public void evaluate() {
     System.out.println(zero);
     System.out.println(zero.hadamard());
-    System.out.println(zero.hadamard().phase(Math.PI / 4));
-    System.out.println(zero.hadamard().phase(Math.PI  / 4).hadamard());
+    System.out.println(zero.hadamard().phase(Math.PI / 2));
+    System.out.println(zero.hadamard().phase(Math.PI  / 2).hadamard());
   }
 }

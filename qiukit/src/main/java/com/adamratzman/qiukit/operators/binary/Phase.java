@@ -3,7 +3,6 @@ package com.adamratzman.qiukit.operators.binary;
 import com.adamratzman.qiukit.Qubit;
 import com.adamratzman.qiukit.QubitAmplitude;
 import com.adamratzman.qiukit.operators.QubitBinaryOperator;
-import org.apache.commons.math3.complex.ComplexUtils;
 
 import java.util.Random;
 
@@ -14,7 +13,8 @@ public class Phase extends QubitBinaryOperator<Qubit, Double> {
 
   @Override
   public Qubit evaluate(Qubit argument, Double radians) {
+    System.out.println(radians);
     QubitAmplitude newOneAmplitude = argument.getOne().plusTheta(radians);
-    return new Qubit(argument.getZero(),newOneAmplitude, getRandom());
+    return new Qubit(argument.getZero(), newOneAmplitude, getRandom());
   }
 }

@@ -2,6 +2,7 @@ package com.adamratzman.qiukit.operators.unary;
 
 import com.adamratzman.qiukit.Qubit;
 import com.adamratzman.qiukit.operators.QubitUnaryOperator;
+import com.adamratzman.qiukit.utils.MathUtils;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.linear.FieldMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
@@ -22,9 +23,10 @@ public class Hadamard extends QubitUnaryOperator<Qubit> {
 
   @Override
   public Qubit evaluate(Qubit argument) {
-    Complex zero = argument.getZero().getComplex().add(argument.getOne().getComplex()).multiply(1 / Math.sqrt(2));
-    Complex one = argument.getZero().getComplex().subtract(argument.getOne().getComplex()).multiply(1 / Math.sqrt(2));
-
-    return new Qubit(zero, one, argument.getRandom());
+    return new Qubit(
+            argument.getZero().getComplex().add(argument.getOne().getComplex()).multiply(1 / Math.sqrt(2)),
+            argument.getZero().getComplex().subtract(argument.getOne().getComplex()).multiply(1 / Math.sqrt(2)),
+            argument.getRandom()
+    );
   }
 }
