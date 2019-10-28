@@ -1,6 +1,7 @@
 package com.adamratzman.qiukit.operators.unary;
 
 import com.adamratzman.qiukit.Qubit;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class RootOfNotTest {
@@ -8,9 +9,11 @@ public class RootOfNotTest {
 
   @Test
   public void evaluate() {
-    System.out.println(zero);
-    System.out.println(zero.hadamard());
-    System.out.println(zero.hadamard().phase(Math.PI / 2));
-    System.out.println(zero.hadamard().phase(Math.PI  / 2).hadamard());
+    Assert.assertEquals(zero.hadamard().phaseDegrees(90).hadamard(), zero.rootOfNot());
+    Assert.assertEquals(zero.not(), zero.rootOfNot().rootOfNot());
+
+    System.out.println(zero.not());
+    System.out.println(zero.rootOfNot());
+    System.out.println(zero.rootOfNot().rootOfNot());
   }
 }

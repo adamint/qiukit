@@ -50,7 +50,7 @@ public class QubitAmplitude {
   }
 
   public QubitAmplitude plusTheta(double otherTheta) {
-    return new QubitAmplitude(sqrtProbability, otherTheta);
+    return new QubitAmplitude(sqrtProbability, theta + otherTheta);
   }
 
   @Override

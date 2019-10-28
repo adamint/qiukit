@@ -12,6 +12,6 @@ public class RootOfNot extends QubitUnaryOperator<Qubit> {
 
   @Override
   public Qubit evaluate(Qubit argument) {
-    return argument.hadamard().phase(Math.PI / 4).hadamard();
+    return argument.hadamard().phase(Math.PI / 2).hadamard();
   }
 }
