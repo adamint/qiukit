@@ -11,9 +11,5 @@ public class RootOfNotTest {
   public void evaluate() {
     Assert.assertEquals(zero.hadamard().phaseDegrees(90).hadamard(), zero.rootOfNot());
     Assert.assertEquals(zero.not(), zero.rootOfNot().rootOfNot());
-
-    System.out.println(zero.not());
-    System.out.println(zero.rootOfNot());
-    System.out.println(zero.rootOfNot().rootOfNot());
   }
 }

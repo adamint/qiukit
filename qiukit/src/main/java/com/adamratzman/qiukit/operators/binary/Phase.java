@@ -13,7 +13,7 @@ public class Phase extends QubitBinaryOperator<Qubit, Double> {
 
   @Override
   public Qubit evaluate(Qubit argument, Double radians) {
-    QubitAmplitude newOneAmplitude = argument.getOne().plusTheta(-radians);
+    QubitAmplitude newOneAmplitude = argument.getOne().plusTheta(radians);
     return new Qubit(argument.getZero(), newOneAmplitude, getRandom());
   }
 }

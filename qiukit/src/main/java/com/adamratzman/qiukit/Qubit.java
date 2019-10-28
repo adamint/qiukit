@@ -2,10 +2,7 @@ package com.adamratzman.qiukit;
 
 import com.adamratzman.qiukit.operators.binary.Phase;
 import com.adamratzman.qiukit.operators.binary.Write;
-import com.adamratzman.qiukit.operators.unary.Hadamard;
-import com.adamratzman.qiukit.operators.unary.Not;
-import com.adamratzman.qiukit.operators.unary.Read;
-import com.adamratzman.qiukit.operators.unary.RootOfNot;
+import com.adamratzman.qiukit.operators.unary.*;
 import com.adamratzman.qiukit.utils.MathUtils;
 import org.apache.commons.math3.complex.Complex;
 
@@ -25,6 +22,8 @@ public class Qubit {
   private Write write;
   private Phase phase;
   private RootOfNot rootOfNot;
+  private PauliY pauliY;
+  private PauliZ pauliZ;
 
   public Qubit(QubitAmplitude zeroAmplitude, QubitAmplitude oneAmplitude, Random random) {
     this.zeroAmplitude = zeroAmplitude;
@@ -37,6 +36,8 @@ public class Qubit {
     this.write = new Write(random);
     this.phase = new Phase(random);
     this.rootOfNot = new RootOfNot(random);
+    this.pauliY = new PauliY(random);
+    this.pauliZ = new PauliZ(random);
   }
 
   public Qubit(Complex zero, Complex one, Random random) {
@@ -49,7 +50,7 @@ public class Qubit {
 
 
   public Qubit(Complex[][] matrix, Random random) {
-    this( new QubitAmplitude(matrix[0][0]),  new QubitAmplitude(matrix[1][0]), random);
+    this(new QubitAmplitude(matrix[0][0]), new QubitAmplitude(matrix[1][0]), random);
   }
 
   public static Qubit getQubit(State state) {
@@ -66,6 +67,38 @@ public class Qubit {
             new Complex(1.0),
             random);
     else throw new IllegalArgumentException();
+  }
+
+  public static Qubit getPlusQubit(Random random) {
+    return getQubit(State.ZERO, random).hadamard();
+  }
+
+  public static Qubit getPlusQubit() {
+    return getPlusQubit(new Random());
+  }
+
+  public static Qubit getMinusQubit(Random random) {
+    return getQubit(State.ONE, random).hadamard();
+  }
+
+  public static Qubit getMinusQubit() {
+    return getMinusQubit(new Random());
+  }
+
+  public static Qubit getPlusYQubit(Random random) {
+    return getQubit(State.ZERO, random).hadamard().phaseDegrees(270);
+  }
+
+  public static Qubit getPlusYQubit() {
+    return getPlusYQubit(new Random());
+  }
+
+  public static Qubit getMinusYQubit(Random random) {
+    return getQubit(State.ZERO, random).hadamard().phaseDegrees(90);
+  }
+
+  public static Qubit getMinusYQubit() {
+    return getMinusYQubit(new Random());
   }
 
   public Qubit read() {
@@ -88,6 +121,14 @@ public class Qubit {
     return write.evaluate(this, state);
   }
 
+  public Qubit pauliY() {
+    return pauliY.evaluate(this);
+  }
+
+  public Qubit pauliZ() {
+    return pauliZ.evaluate(this);
+  }
+
   public double getRelativePhase() {
     double phase = oneAmplitude.getAngle() - zeroAmplitude.getAngle();
     while (phase >= 2 * Math.PI || MathUtils.equals(phase, 2 * Math.PI, delta)) phase -= 2 * Math.PI;
@@ -95,6 +136,10 @@ public class Qubit {
     if (MathUtils.equals(phase, 0, delta)) return 0;
 
     return phase;
+  }
+
+  public Qubit phaseZero(double radians) {
+    return new Qubit(getZero().plusTheta(radians), getOne(), random);
   }
 
   public Qubit phase(double radians) {
@@ -160,4 +205,5 @@ public class Qubit {
   public enum State {
     ONE, ZERO
   }
+
 }
