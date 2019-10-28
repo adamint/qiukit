@@ -27,7 +27,5 @@ public class HadamardTest {
     Assert.assertEquals(qubit, qubit.hadamard().hadamard());
 
     System.out.println(one.hadamard());
-
-    new Qubit(new QubitAmplitude())
   }
 }

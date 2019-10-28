@@ -11,6 +11,8 @@ import org.apache.commons.math3.complex.Complex;
 
 import java.util.Random;
 
+import static com.adamratzman.qiukit.QubitAmplitude.delta;
+
 public class Qubit {
   private QubitAmplitude zeroAmplitude;
   private QubitAmplitude oneAmplitude;
@@ -38,7 +40,7 @@ public class Qubit {
   }
 
   public Qubit(Complex zero, Complex one, Random random) {
-    this(QubitAmplitude.fromComplex(zero), QubitAmplitude.fromComplex(one), random);
+    this(new QubitAmplitude(zero), new QubitAmplitude(one), random);
   }
 
   public Qubit(double realZero, double realOne, Random random) {
@@ -47,7 +49,7 @@ public class Qubit {
 
 
   public Qubit(Complex[][] matrix, Random random) {
-    this( QubitAmplitude.fromComplex(matrix[0][0]),  QubitAmplitude.fromComplex(matrix[1][0]), random);
+    this( new QubitAmplitude(matrix[0][0]),  new QubitAmplitude(matrix[1][0]), random);
   }
 
   public static Qubit getQubit(State state) {
@@ -87,11 +89,20 @@ public class Qubit {
   }
 
   public double getRelativePhase() {
-    return oneAmplitude.getAngle() - zeroAmplitude.getAngle();
+    double phase = oneAmplitude.getAngle() - zeroAmplitude.getAngle();
+    while (phase >= 2 * Math.PI || MathUtils.equals(phase, 2 * Math.PI, delta)) phase -= 2 * Math.PI;
+    while (phase < 0) phase += 2 * Math.PI;
+    if (MathUtils.equals(phase, 0, delta)) return 0;
+
+    return phase;
   }
 
   public Qubit phase(double radians) {
     return phase.evaluate(this, radians);
+  }
+
+  public Qubit phaseDegrees(double degrees) {
+    return phase.evaluate(this, degrees * Math.PI / 180);
   }
 
   public Random getRandom() {
@@ -126,8 +137,8 @@ public class Qubit {
 
   public double getProbability(State state) {
     double coefficient;
-    if (state == State.ZERO) coefficient = getZero().getReal();
-    else coefficient = getOne().getReal();
+    if (state == State.ZERO) coefficient = getZero().getSqrtProbability();
+    else coefficient = getOne().getSqrtProbability();
     return Math.pow(coefficient, 2.0);
   }
 

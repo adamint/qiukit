@@ -6,7 +6,6 @@ import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.linear.FieldMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Hadamard extends QubitUnaryOperator<Qubit> {
@@ -25,6 +24,7 @@ public class Hadamard extends QubitUnaryOperator<Qubit> {
   public Qubit evaluate(Qubit argument) {
     Complex zero = argument.getZero().getComplex().add(argument.getOne().getComplex()).multiply(1 / Math.sqrt(2));
     Complex one = argument.getZero().getComplex().subtract(argument.getOne().getComplex()).multiply(1 / Math.sqrt(2));
+
     return new Qubit(zero, one, argument.getRandom());
   }
 }

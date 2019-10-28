@@ -14,10 +14,7 @@ public class Phase extends QubitBinaryOperator<Qubit, Double> {
 
   @Override
   public Qubit evaluate(Qubit argument, Double radians) {
-    double realAdded = ComplexUtils.polar2Complex(1, radians + argument.getOne().getAngle()).getReal();
-    double scaleFactor;
-    if (realAdded == 0) scaleFactor = 1;
-    else scaleFactor =1.0 / realAdded;
-    return new Qubit(argument.getZero(), new QubitAmplitude(Math.abs(argument.getOne().getCoefficient() * scaleFactor), argument.getOne().getAngle() + radians), getRandom());
+    QubitAmplitude newOneAmplitude = argument.getOne().plusTheta(radians);
+    return new Qubit(argument.getZero(),newOneAmplitude, getRandom());
   }
 }
