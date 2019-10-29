@@ -2,8 +2,8 @@ package com.adamratzman.qiukit.library;
 
 import com.adamratzman.qiukit.Circuit;
 import com.adamratzman.qiukit.Gate;
-import com.adamratzman.qiukit.operators.unary.Hadamard;
-import com.adamratzman.qiukit.operators.unary.Read;
+import com.adamratzman.qiukit.operators.one.unary.Hadamard;
+import com.adamratzman.qiukit.operators.one.unary.Read;
 import com.adamratzman.qiukit.Qubit;
 
 import java.util.Arrays;

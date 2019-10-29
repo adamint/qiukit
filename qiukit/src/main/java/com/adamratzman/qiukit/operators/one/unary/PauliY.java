@@ -1,4 +1,4 @@
-package com.adamratzman.qiukit.operators.unary;
+package com.adamratzman.qiukit.operators.one.unary;
 
 import com.adamratzman.qiukit.Qubit;
 import com.adamratzman.qiukit.operators.QubitUnaryOperator;
@@ -6,9 +6,13 @@ import org.apache.commons.math3.complex.Complex;
 
 import java.util.Random;
 
-public class PauliY extends QubitUnaryOperator<Qubit> {
+public class PauliY extends QubitUnaryOperator<Qubit, Qubit> {
   public PauliY(Random random) {
     super("Y", random);
+  }
+
+  public PauliY() {
+    super("Y");
   }
 
   @Override

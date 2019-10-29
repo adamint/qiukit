@@ -7,8 +7,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Gate<E, T> extends Circuit {
-  private List<Qubit> qubits;
+  List<Qubit> qubits;
   private QubitOperator<Qubit, T> qubitOperator;
+
+  public Gate(QubitOperator<Qubit, T> qubitOperator) {
+    this(Collections.emptyList(), qubitOperator);
+  }
 
   public Gate(List<Qubit> qubits, QubitOperator<Qubit, T> qubitOperator) {
     super(new ArrayList<>());

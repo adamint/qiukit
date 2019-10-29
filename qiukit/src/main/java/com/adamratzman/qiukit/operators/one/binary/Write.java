@@ -1,14 +1,18 @@
-package com.adamratzman.qiukit.operators.binary;
+package com.adamratzman.qiukit.operators.one.binary;
 
 
-import com.adamratzman.qiukit.operators.QubitBinaryOperator;
 import com.adamratzman.qiukit.Qubit;
+import com.adamratzman.qiukit.operators.QubitBinaryOperator;
 
 import java.util.Random;
 
-public class Write extends QubitBinaryOperator<Qubit, Qubit.State> {
+public class Write extends QubitBinaryOperator<Qubit, Qubit.State, Qubit> {
   public Write(Random random) {
     super("Write", random);
+  }
+
+  public Write() {
+    super("Write");
   }
 
   @Override

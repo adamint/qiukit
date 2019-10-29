@@ -1,8 +1,7 @@
 package com.adamratzman.qiukit;
 
-import com.adamratzman.qiukit.operators.binary.Phase;
-import com.adamratzman.qiukit.operators.binary.Write;
-import com.adamratzman.qiukit.operators.unary.*;
+import com.adamratzman.qiukit.operators.one.unary.*;
+import com.adamratzman.qiukit.operators.one.binary.*;
 import com.adamratzman.qiukit.utils.MathUtils;
 import org.apache.commons.math3.complex.Complex;
 
@@ -24,6 +23,8 @@ public class Qubit {
   private RootOfNot rootOfNot;
   private PauliY pauliY;
   private PauliZ pauliZ;
+  private SPhase sPhase;
+  private TPhase tPhase;
 
   public Qubit(QubitAmplitude zeroAmplitude, QubitAmplitude oneAmplitude, Random random) {
     this.zeroAmplitude = zeroAmplitude;
@@ -38,6 +39,8 @@ public class Qubit {
     this.rootOfNot = new RootOfNot(random);
     this.pauliY = new PauliY(random);
     this.pauliZ = new PauliZ(random);
+    this.tPhase = new TPhase(random);
+    this.sPhase = new SPhase(random);
   }
 
   public Qubit(Complex zero, Complex one, Random random) {
@@ -129,6 +132,15 @@ public class Qubit {
     return pauliZ.evaluate(this);
   }
 
+  public Qubit sPhase() {
+    return sPhase.evaluate(this);
+  }
+
+  public Qubit tPhase() {
+    return tPhase.evaluate(this);
+  }
+
+
   public double getRelativePhase() {
     double phase = oneAmplitude.getAngle() - zeroAmplitude.getAngle();
     while (phase >= 2 * Math.PI || MathUtils.equals(phase, 2 * Math.PI, delta)) phase -= 2 * Math.PI;
@@ -185,6 +197,12 @@ public class Qubit {
     if (state == State.ZERO) coefficient = getZero().getSqrtProbability();
     else coefficient = getOne().getSqrtProbability();
     return Math.pow(coefficient, 2.0);
+  }
+
+  public State getBaseState() {
+    if (equals(getQubit(State.ZERO))) return State.ZERO;
+    else if (equals(getQubit(State.ONE))) return State.ONE;
+    else return null;
   }
 
   @Override

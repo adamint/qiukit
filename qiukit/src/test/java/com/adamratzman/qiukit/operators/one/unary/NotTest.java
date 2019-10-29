@@ -1,10 +1,8 @@
-package com.adamratzman.qiukit.operators.unary;
+package com.adamratzman.qiukit.operators.one.unary;
 
 import com.adamratzman.qiukit.Qubit;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class NotTest {
   private Qubit zero = Qubit.getQubit(Qubit.State.ZERO);

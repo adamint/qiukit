@@ -1,15 +1,14 @@
-package com.adamratzman.qiukit.operators.unary;
+package com.adamratzman.qiukit.operators.one.unary;
 
 import com.adamratzman.qiukit.Qubit;
 import com.adamratzman.qiukit.operators.QubitUnaryOperator;
-import com.adamratzman.qiukit.utils.MathUtils;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.linear.FieldMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
 
 import java.util.Random;
 
-public class Hadamard extends QubitUnaryOperator<Qubit> {
+public class Hadamard extends QubitUnaryOperator<Qubit, Qubit> {
   private FieldMatrix<Complex> hadamardMatrix = MatrixUtils.createFieldMatrix(
           new Complex[][]{
                   new Complex[]{new Complex(1), new Complex(1)},
@@ -19,6 +18,10 @@ public class Hadamard extends QubitUnaryOperator<Qubit> {
 
   public Hadamard(Random random) {
     super("Hadamard", random);
+  }
+
+  public Hadamard() {
+    super("Hadamard");
   }
 
   @Override

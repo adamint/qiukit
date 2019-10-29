@@ -1,4 +1,4 @@
-package com.adamratzman.qiukit.operators.unary;
+package com.adamratzman.qiukit.operators.one.unary;
 
 import com.adamratzman.qiukit.Qubit;
 import org.junit.Assert;

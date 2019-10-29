@@ -1,4 +1,4 @@
-package com.adamratzman.qiukit.operators.binary;
+package com.adamratzman.qiukit.operators.one.binary;
 
 import com.adamratzman.qiukit.Qubit;
 import com.adamratzman.qiukit.QubitAmplitude;
@@ -6,9 +6,13 @@ import com.adamratzman.qiukit.operators.QubitBinaryOperator;
 
 import java.util.Random;
 
-public class Phase extends QubitBinaryOperator<Qubit, Double> {
+public class Phase extends QubitBinaryOperator<Qubit, Double, Qubit> {
   public Phase(Random random) {
-    super("Phase", random);
+    super("R", random);
+  }
+
+  public Phase() {
+    super("Phase");
   }
 
   @Override

@@ -1,2 +1,5 @@
 rootProject.name = 'Qiukit'
+include 'samples'
+include 'samples'
+include 'samples'
 

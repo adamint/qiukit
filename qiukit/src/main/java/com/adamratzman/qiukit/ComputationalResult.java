@@ -16,4 +16,9 @@ public class ComputationalResult <A, B> {
   public B getAfter() {
     return after;
   }
+
+  @Override
+  public String toString() {
+    return "Computation(before=" + before + ", after=" + after + ")";
+  }
 }

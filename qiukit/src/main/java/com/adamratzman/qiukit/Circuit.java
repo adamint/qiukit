@@ -1,10 +1,16 @@
 package com.adamratzman.qiukit;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Circuit {
   private List<Circuit> circuits;
+
+  public Circuit(Circuit... circuits) {
+    this.circuits = new ArrayList<>();
+    this.circuits.addAll(Arrays.asList(circuits));
+  }
 
   public Circuit(List<Circuit> circuits) {
     this.circuits = circuits;
@@ -28,6 +34,12 @@ public class Circuit {
     List<ComputationalResult> results = new ArrayList<>();
     Object supply = initial;
     for (Circuit circuit : circuits) {
+      if (circuit instanceof Gate && supply instanceof Qubit) {
+        Gate gate = (Gate) circuit;
+        ArrayList<Qubit> qubits = new ArrayList<Qubit>(gate.qubits);
+        qubits.add((Qubit) supply);
+        gate.qubits = qubits;
+      }
       List<ComputationalResult> circuitResults = circuit.evaluate(supply);
       results.addAll(circuitResults);
       supply = circuitResults.get(circuitResults.size() - 1).getAfter();
