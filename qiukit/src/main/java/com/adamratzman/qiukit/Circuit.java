@@ -29,6 +29,10 @@ public class Circuit {
     this.circuits = circuits;
   }
 
+  public List<ComputationalResult> evaluate() {
+    return evaluate(null);
+  }
+
   public List<ComputationalResult> evaluate(Object initial) {
     if (circuits.isEmpty()) return null;
     List<ComputationalResult> results = new ArrayList<>();

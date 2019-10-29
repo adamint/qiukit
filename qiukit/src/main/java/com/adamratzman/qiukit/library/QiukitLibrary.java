@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Random;
 
 public class QiukitLibrary {
+  public static Circuit generateRandomQubit() {
+    return generateRandomQubit(new Random());
+  }
+
   public static Circuit generateRandomQubit(Random random) {
     Qubit qubit = Qubit.getQubit(Qubit.State.ZERO, random);
     List<Circuit> gates = Arrays.asList(

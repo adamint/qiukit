@@ -23,18 +23,26 @@ public class Swap extends QubitUnaryOperator<Pair<Qubit, Qubit>, Pair<Qubit, Qub
     super("Swap", random);
   }
 
+  public Swap() {
+    super("Swap");
+  }
+
   @Override
   public Pair<Qubit, Qubit> evaluate(Pair<Qubit, Qubit> argument) {
     FieldMatrix<Complex> result = swapMatrix.multiply(
             MatrixUtils.createFieldMatrix(
                     new Complex[][]{
-                            new Complex[]{argument.getKey().getZero().getComplex(), argument.getValue().getZero().getComplex()},
-                            new Complex[]{argument.getKey().getOne().getComplex(), argument.getValue().getOne().getComplex()}
+                            new Complex[]{argument.getKey().getZero().getComplex()},
+                            new Complex[]{argument.getKey().getOne().getComplex()},
+                            new Complex[]{argument.getValue().getZero().getComplex()},
+                            new Complex[]{argument.getValue().getOne().getComplex()}
                     }
             )
     );
 
-    return null;
+    Qubit one = new Qubit(result.getData()[1][0], result.getData()[3][0], argument.getKey().getRandom());
+    Qubit two = new Qubit(result.getData()[0][0], result.getData()[2][0], argument.getValue().getRandom());
 
+    return new Pair<>(one, two);
   }
 }

@@ -22,7 +22,7 @@ public class RandomBit {
     List<ComputationalResult> resultProgression = randomBitCircuit.evaluate(zero);
 
     Qubit result = (Qubit) resultProgression.get(resultProgression.size() - 1).getAfter();
-    System.out.println("\nResulted in: " + result.getBaseState());
+    System.out.println("\nResulted in: " + result.getState());
 
     System.out.println("\nCircuit evaluation progression:\n");
     System.out.print(

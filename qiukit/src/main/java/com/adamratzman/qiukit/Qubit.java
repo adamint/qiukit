@@ -199,7 +199,7 @@ public class Qubit {
     return Math.pow(coefficient, 2.0);
   }
 
-  public State getBaseState() {
+  public State getState() {
     if (equals(getQubit(State.ZERO))) return State.ZERO;
     else if (equals(getQubit(State.ONE))) return State.ONE;
     else return null;
