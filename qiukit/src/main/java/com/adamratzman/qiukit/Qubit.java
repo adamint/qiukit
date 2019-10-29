@@ -3,6 +3,7 @@ package com.adamratzman.qiukit;
 import com.adamratzman.qiukit.operators.one.unary.*;
 import com.adamratzman.qiukit.operators.one.binary.*;
 import com.adamratzman.qiukit.utils.MathUtils;
+import javafx.util.Pair;
 import org.apache.commons.math3.complex.Complex;
 
 import java.util.Random;
@@ -120,8 +121,10 @@ public class Qubit {
     return rootOfNot.evaluate(this);
   }
 
-  public Qubit write(Qubit.State state) {
-    return write.evaluate(this, state);
+  public void write(Qubit.State state) {
+    Qubit wrote = write.evaluate(this, state);
+    zeroAmplitude = wrote.getZero();
+    oneAmplitude = wrote.getOne();
   }
 
   public Qubit pauliY() {
@@ -166,6 +169,10 @@ public class Qubit {
     return random;
   }
 
+  public Pair<Complex, Complex> getAsComplexPair() {
+    return new Pair<>(getZero().getComplex(), getOne().getComplex());
+  }
+
   public QubitAmplitude[] getAsVector() {
     return new QubitAmplitude[]{getZero(), getOne()};
   }
@@ -181,7 +188,7 @@ public class Qubit {
   }
 
   public boolean is(State state) {
-    return getProbability(state) == 1.0;
+    return MathUtils.equals(getProbability(state), 1.0, delta);
   }
 
   public QubitAmplitude getZero() {

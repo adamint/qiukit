@@ -8,7 +8,7 @@ import java.util.Random;
 public class Qiukit {
   private static Random random = new Random(1);
   public static void main(String[] args) {
-    System.out.println(QiukitLibrary.generateRandomQubit(random));
+    System.out.println(QiukitLibrary.hadRead(random));
     System.out.println(new Hadamard(random).evaluate(Qubit.getQubit(Qubit.State.ZERO, random)));
     Qubit zero = Qubit.getQubit(Qubit.State.ZERO);
     System.out.println(zero);

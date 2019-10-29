@@ -52,6 +52,11 @@ public class Circuit {
     return results;
   }
 
+  public Object evaluateDiscardingSteps(Object initial) {
+    List<ComputationalResult> results = evaluate(initial);
+    return results.get(results.size() - 1).getAfter();
+  }
+
   @Override
   public String toString() {
     return circuits.toString();
