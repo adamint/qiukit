@@ -1,0 +1,44 @@
+{{> header.hbs }}
+
+<div>
+    <div class="uk-margin-small-top uk-section uk-section-large">
+        <h2 class="bold uk-text-center">Quantum Campaigns</h2>
+
+        <div class="uk-margin-auto uk-margin-medium-top uk-width-3-5">
+            <ul uk-accordion>
+                {{#each campaigns}}
+                    <li>
+                        <h3 class="uk-accordion-title">
+                            <a class="black" href="/textbook/{{id}}">{{name}}</a>
+                        </h3>
+                        <div class="uk-accordion-content">
+                            <ul>
+                                <li class="uk-margin-small-bottom">
+                                    <a href="/campaigns/{{id}}">{{name}} Overview</a>
+                                </li>
+
+                                {{#each pages}}
+                                    <li>
+                                        <a href="/campaigns/{{id}}/{{pageId}}">
+                                            {{name}}
+                                            {{#if hasNotes}}
+                                                <a href="/campaigns/{{id}}/{{pageId}}/notes">
+                                                    <img width="20px" src="/icons/mbr/mbri-pages.svg" alt="pages">
+                                                </a>
+                                            {{/if}}
+                                        </a>
+                                        <p>
+                                            View <a href="/campaigns/{{id}}/{{pageId}}">this section →</a>
+                                        </p>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{{> footer.hbs }}

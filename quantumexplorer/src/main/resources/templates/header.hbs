@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <title>{{title}}</title>
+
+    <!-- Meta -->
+    <meta name="description" content="{{description}}">
+
+    <!-- Rubik -->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.1/css/uikit.min.css"/>
+
+    <!-- Additional CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.26/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.26/js/uikit-icons.min.js"></script>
+
+    <!-- jQuery -->
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?9ukd8d">
+</head>
+
+<body>
+
+<nav id="header" class="uk-position-top uk-navbar-container uk-navbar-transparent uk-margin-large-left
+uk-margin-large-right uk-margin-small-top uk-margin-small-bottom" uk-navbar>
+    <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav ">
+            <li>
+                <div class="uk-navbar-item super-bold rem-1">
+                    <a class="black disable-link-highlighting" href="/">Quantum Explorer</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="uk-navbar-right uk-hidden@l">
+        <a uk-navbar-toggle-icon="" href="#offcanvas" uk-toggle
+           class="uk-navbar-toggle uk-navbar-toggle-icon uk-icon">
+        </a>
+    </div>
+
+    <div class="uk-hidden@l" id="offcanvas" uk-offcanvas="overlay: true;">
+        <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+            <button class="uk-offcanvas-close" style="color: black;" type="button" uk-close></button>
+
+            <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                <li {{#ifeq page "home"}}class="uk-active"{{/ifeq}}><a href="/">Home</a></li>
+                <li {{#ifeq page "campaigns"}}class="uk-active"{{/ifeq}}><a href="/campaigns">Campaigns</a></li>
+                <li {{#ifeq page "environment"}}class="uk-active"{{/ifeq}}><a href="/environment">Quantum Environment</a></li>
+                <li {{#ifeq page "about"}}class="uk-active"{{/ifeq}}><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="uk-navbar-right uk-visible@l">
+        <ul class="uk-navbar-nav ">
+            <li>
+                <div class="uk-navbar-item bold rem-1">
+                    <a class="black disable-link-highlighting" href="/campaigns">Campaigns</a>
+                </div>
+            </li>
+            <li>
+                <div class="uk-navbar-item bold rem-1">
+                    <a class="black disable-link-highlighting" href="/environment">Quantum Environment</a>
+                </div>
+            </li>
+            <li>
+                <div class="uk-navbar-item bold rem-1">
+                    <a class="black disable-link-highlighting" href="/about">About</a>
+                </div>
+            </li>
+            <li>
+                <div class="uk-navbar-item bold rem-1">
+                    <a class="uk-margin-small-right" href="/github"><img
+                            src="/icons/mbr/mbri-github.svg" alt="paper-plane"></a>
+                    <a class="black" href="/github">Github</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

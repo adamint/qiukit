@@ -1,0 +1,16 @@
+{{> header.hbs }}
+
+<div>
+    <div class="uk-margin-small-top uk-section uk-section-large">
+        <h2 class="light uk-text-center">Reference List</h2>
+
+        <div class="uk-text-center uk-margin-auto uk-margin-remove-bottom js-upload uk-placeholder uk-width-1-4">
+            {{#each extended-references}}
+                <h3 class="uk-margin-small-top moderate-bold"><a href="{{& path}}">{{name}} {{> open-in-new.hbs}}</a>
+                </h3>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+{{> footer.hbs }}

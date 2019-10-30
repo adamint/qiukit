@@ -1,0 +1,122 @@
+html, a, nav, li {
+    font-family: 'Rubik', sans-serif !important;
+    color: black;
+    text-transform: none !important;
+}
+
+@media only screen and (max-width: 1200px) {
+    html {
+        font-size: 2em;
+    }
+}
+
+.super-bold {
+    font-weight: 700;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.moderate-bold {
+    font-weight: 400;
+}
+
+.light {
+    font-weight: 300;
+}
+
+.rem-1 {
+    font-size: 1rem;
+}
+
+.rem-1-8 {
+    font-size: 1.8rem;
+}
+
+.rem-1-5 {
+    font-size: 1.5rem;
+}
+
+.rem-1-2 {
+    font-size: 1.2rem;
+}
+
+.left-subheading-margin {
+    margin-left: 40%;
+}
+
+.disable-link-highlighting. a, a:hover, a:visited {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: white;
+}
+
+a.underline {
+    text-decoration: underline;
+}
+
+a, a:hover {
+    color: #149dcc;
+}
+
+.black {
+    color: black;
+}
+
+.numbered-list {
+    list-style: none;
+    counter-reset: counter;
+}
+
+.numbered-list li:before {
+    counter-increment: counter;
+    content: counter(counter);
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    transition: all .2s;
+    color: #ffffff;
+    background: #149dcc;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    left: 0;
+    margin: 0 10px 5px -3em;
+    position: absolute;
+}
+
+.checked-list {
+    list-style: none;
+}
+
+.checked-list li:before {
+    position: absolute;
+    left: 0;
+    padding-top: 3px;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    transition: all .2s;
+    color: #ffffff;
+    background: #149dcc;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    content: '✓';
+    margin: 0 10px 0 -2em;
+}
+
+.offcanvas {
+    display: none !important;
+}
+
+.time {
+    color: #666
+}
+
+.link-color {
+    color: #149dcc
+}

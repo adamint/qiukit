@@ -1,0 +1,62 @@
+<div id="generated-problem">
+    <div id="generated-problem-content">
+        <!-- Generated -->
+        <script type="application/javascript">
+            let question = "{{& problem.quesJson}}";
+            let answer = "{{& problem.ansJson}}";
+            let query = "{{& problem.queryUrl}}";
+
+            function handleClick() {
+                $.get(query, function (problem) {
+                    question = problem.question;
+                    answer = problem.answer;
+
+                    let button = $("#side-change-button");
+                    if (button.text() !== "See Answer") {
+                        button.click()
+                    } else {
+                        let math = MathJax.Hub.getAllJax("math-txt")[0];
+                        MathJax.Hub.Queue(["Text", math, question]);
+                    }
+                }, "json");
+            }
+
+            function changeContent() {
+                let problemDiv = $("#problem-div");
+                let button = problemDiv.find("a.see-btn").first();
+                let content = problemDiv.find("span.content").first();
+
+                let math = MathJax.Hub.getAllJax("math-txt")[0];
+
+                if (math.originalText === question) {
+                    $("#before-math").text("Answer: ");
+                    MathJax.Hub.Queue(["Text", math, answer]);
+                    button.text("See Question")
+                } else {
+                    $("#before-math").text("What is: ");
+                    MathJax.Hub.Queue(["Text", math, question]);
+                    button.text("See Answer")
+                }
+            }
+        </script>
+
+        <div id="problem-div" class="uk-margin-auto uk-width-1-3">
+            {{#with problem}}
+                <div class="js-upload uk-placeholder">
+                    <div>
+                        <p id="before-math" class="uk-display-inline">What is: </p>
+                        <p id="math-txt" class="uk-display-inline-block content">\({{original-question}}\)</p>
+                    </div>
+
+                    <a id="side-change-button" onclick="changeContent()"
+                       class="see-btn uk-button uk-button-default uk-button-small uk-display-inline-block">See
+                        Answer</a>
+
+                    <br/>
+                    <br/>
+                    <a onclick="handleClick()" class="uk-align-right">See another →</a>
+                </div>
+            {{/with}}
+        </div>
+    </div>
+</div>

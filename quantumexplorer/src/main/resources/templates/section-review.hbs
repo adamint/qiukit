@@ -1,0 +1,52 @@
+{{> header.hbs }}
+
+<div>
+    <div class="uk-margin-small-top uk-section uk-section-large">
+        <h2 class="light uk-text-center">Section {{chapter.chapterNumber}}.{{section.sectionNumber}} <b>Review</b></h2>
+
+        <h3 class="left-subheading-margin">{{chapter.chapterNumber}}.{{section.sectionNumber}} Review</h3>
+
+        {{#if image-links}}
+            <div class="uk-text-center uk-margin-auto uk-margin-remove-bottom js-upload uk-placeholder uk-width-1-4">
+                {{#each image-links}}
+                    <h3 class="uk-margin-small-top moderate-bold">
+                        <a href="/aws/{{& second}}">{{first}} {{> open-in-new.hbs}}</a>
+                    </h3>
+                {{/each}}
+            </div>
+
+            <h3 class="left-subheading-margin">
+                <a class="black"
+                   href="/aws/textbook/chapter{{chapter.chapterNumber}}/review/{{chapter.chapterNumber}}-{{section.sectionNumber}}/solutions{{chapter.chapterNumber}}-{{section.sectionNumber}}.pdf">
+                    Section {{chapter.chapterNumber}}.{{section.sectionNumber}} Review Solutions <img width="20px"
+                                                                                                      src="/icons/mbr/mbri-pages.svg"
+                                                                                                      alt="pages">
+                </a>
+            </h3>
+        {{else}}
+            {{#each image-link-days-list}}
+                <h4 class="left-subheading-margin">{{first.first}}</h4>
+
+                <div class="uk-text-center uk-margin-auto uk-margin-remove-bottom js-upload uk-placeholder uk-width-1-4">
+                    {{#each second}}
+                        <h3 class="uk-margin-small-top moderate-bold">
+                            <a href="/aws/{{& second}}">{{first}} {{> open-in-new.hbs}}</a>
+                        </h3>
+                    {{/each}}
+                </div>
+
+                <h3 class="left-subheading-margin">
+                    <a class="black"
+                       href="/aws/textbook/chapter{{chapter.chapterNumber}}/review/{{first.second}}/solutions{{first.second}}.pdf">
+                        Section {{first.first}} Review Solutions <img width="20px"
+                                                                                                          src="/icons/mbr/mbri-pages.svg"
+                                                                                                          alt="pages">
+                    </a>
+                </h3>
+            {{/each}}
+        {{/if}}
+
+    </div>
+</div>
+
+{{> footer.hbs }}

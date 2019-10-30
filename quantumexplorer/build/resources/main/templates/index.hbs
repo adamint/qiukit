@@ -1,0 +1,21 @@
+{{> header.hbs }}
+
+<div>
+    <div class="uk-margin-small-top uk-section uk-section-large">
+        <h2 class="light uk-text-center">An interactive introductory quantum computing explorer for learners</h2>
+
+        <h2 class="moderate-bold uk-text-center"><a href="/campaigns" class="black">Campaigns {{> open-in-new.hbs }}</a></h2>
+
+        <div class="uk-margin-auto uk-text-center">
+            {{#each campaigns}}
+                <h3 class="uk-margin-small-top"><a href="/campaign/{{id}}">{{name}} {{> open-in-new.hbs }}</a>
+                </h3>
+            {{/each}}
+        </div>
+
+        <h2 class="moderate-bold uk-text-center"><a href="/environment" class="black">Interactive Quantum Environment {{> open-in-new.hbs }}</a>
+        </h2>
+    </div>
+</div>
+
+{{> footer.hbs }}
