@@ -1,8 +1,0 @@
-Features
-
-- Postfix notation
-- Multi-char operator support
-- Translation into Java code
-- One global array. Value of each statement is appended to global array
-- 
-
