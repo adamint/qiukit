@@ -1,0 +1,1 @@
+web: java -Dserver.port=80 $JAVA_OPTS -jar build/libs/Qiukit-1.0-SNAPSHOT.jar
