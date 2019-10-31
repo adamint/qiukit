@@ -2,9 +2,8 @@ package com.adamratzman.qiukit;
 
 import com.adamratzman.qiukit.operators.QubitBinaryOperator;
 import com.adamratzman.qiukit.operators.QubitOperator;
-import javafx.util.Pair;
+import com.adamratzman.qiukit.utils.Pair;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

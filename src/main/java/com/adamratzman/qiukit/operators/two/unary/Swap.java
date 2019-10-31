@@ -2,7 +2,7 @@ package com.adamratzman.qiukit.operators.two.unary;
 
 import com.adamratzman.qiukit.Qubit;
 import com.adamratzman.qiukit.operators.QubitUnaryOperator;
-import javafx.util.Pair;
+import com.adamratzman.qiukit.utils.Pair;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.linear.FieldMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;

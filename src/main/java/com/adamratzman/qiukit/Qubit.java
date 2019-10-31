@@ -3,7 +3,7 @@ package com.adamratzman.qiukit;
 import com.adamratzman.qiukit.operators.one.unary.*;
 import com.adamratzman.qiukit.operators.one.binary.*;
 import com.adamratzman.qiukit.utils.MathUtils;
-import javafx.util.Pair;
+import com.adamratzman.qiukit.utils.Pair;
 import org.apache.commons.math3.complex.Complex;
 
 import java.util.Random;

@@ -1,11 +1,9 @@
 package com.adamratzman.qiukit.operators.two.unary;
 
 import com.adamratzman.qiukit.Qubit;
-import javafx.util.Pair;
+import com.adamratzman.qiukit.utils.Pair;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class SwapTest {
   private Qubit zero = Qubit.getQubit(Qubit.State.ZERO).hadamard().phase(Math.PI);

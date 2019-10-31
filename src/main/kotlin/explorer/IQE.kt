@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.adamratzman.explorer
 
 import com.adamratzman.math.Expression
@@ -66,7 +68,7 @@ fun QuantumExplorer.iqe() {
                 }
 
                 if (argument == null) Gate<Qubit, Qubit>(operator as QubitOperator<Qubit, Qubit>)
-                else GateWithArgument(operator as QubitOperator<javafx.util.Pair<Qubit, Any>, Qubit>, argument)
+                else GateWithArgument(operator as QubitOperator<Pair<Qubit, Any>, Qubit>, argument)
             }
 
             val circuit = Circuit(gates)

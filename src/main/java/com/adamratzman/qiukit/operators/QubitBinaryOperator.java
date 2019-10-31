@@ -1,6 +1,6 @@
 package com.adamratzman.qiukit.operators;
 
-import javafx.util.Pair;
+import com.adamratzman.qiukit.utils.Pair;
 
 import java.util.List;
 import java.util.Random;
