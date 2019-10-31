@@ -1,16 +1,19 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.adamratzman.explorer
+package explorer
 
+import com.adamratzman.explorer.QuantumExplorer
+import com.adamratzman.explorer.getMap
+import com.adamratzman.explorer.handlebars
+import com.adamratzman.explorer.render
+import com.adamratzman.explorer.toModel
 import com.adamratzman.math.Expression
-import com.adamratzman.math.parser.ExpressionEvaluator
 import com.adamratzman.qiukit.Circuit
 import com.adamratzman.qiukit.ComputationalResult
 import com.adamratzman.qiukit.Gate
 import com.adamratzman.qiukit.GateWithArgument
 import com.adamratzman.qiukit.Qubit
 import com.adamratzman.qiukit.QubitAmplitude
-import com.adamratzman.qiukit.operators.QubitBinaryOperator
 import com.adamratzman.qiukit.operators.QubitOperator
 import com.adamratzman.qiukit.operators.one.binary.Phase
 import com.adamratzman.qiukit.operators.one.binary.Write
@@ -23,9 +26,7 @@ import com.adamratzman.qiukit.operators.one.unary.RootOfNot
 import com.adamratzman.qiukit.operators.one.unary.SPhase
 import com.adamratzman.qiukit.operators.one.unary.TPhase
 import com.adamratzman.qiukit.operators.two.unary.Swap
-import com.google.gson.Gson
 import spark.Spark.get
-import spark.Spark.init
 import spark.Spark.path
 import java.lang.Exception
 import java.util.Random
@@ -68,7 +69,7 @@ fun QuantumExplorer.iqe() {
                 }
 
                 if (argument == null) Gate<Qubit, Qubit>(operator as QubitOperator<Qubit, Qubit>)
-                else GateWithArgument(operator as QubitOperator<Pair<Qubit, Any>, Qubit>, argument)
+                else GateWithArgument(operator as QubitOperator<com.adamratzman.qiukit.utils.Pair<Qubit, Any>, Qubit>, argument)
             }
 
             val circuit = Circuit(gates)
