@@ -54,8 +54,8 @@ fun QuantumExplorer.iqe() {
         get("/compute") { request, _ ->
             val map = getMap("","",false)
             val initialQubit = qubitConstants.toList().first { it.first == request.queryParams("initial") }
-            val gates = request.queryParams("gates").split(" ").filter { it.isNotBlank() }.map { gateString ->
-                val splitByParams = gateString.replace("|", "").removeSuffix(")").split("(")
+            val gates = request.queryParams("gates").replace("|", "").split(" ").filter { it.isNotBlank() }.map { gateString ->
+                val splitByParams = gateString.removeSuffix(")").split("(")
                 val operator = operators.first { it.name == splitByParams.first() }
                 val argument = splitByParams.getOrNull(1)?.replace("pi", Math.PI.toString())?.let {
                     try {
@@ -83,7 +83,7 @@ fun QuantumExplorer.iqe() {
             map["initial"] = initialQubit.second.toModel(1)
 map["circuit"] = "<b>${initialQubit.second.zero.toDiracString()}|0⟩ + ${initialQubit.second.one.toDiracString()}|1></b> " +
         if (request.queryParams("gates").isNotEmpty()) " | " +
-                request.queryParams("gates").split(" ").joinToString(" | ") else ""
+                request.queryParams("gates").split(" ").joinToString(" ") else ""
             handlebars.render(map, "circuit-computation.hbs")
         }
 

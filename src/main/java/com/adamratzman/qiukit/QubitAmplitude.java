@@ -71,6 +71,7 @@ public class QubitAmplitude {
       if (!s.isEmpty()) s += " ";
       s += complex.getImaginary() + "i";
     }
+    if (s.isEmpty()) s = "0";
     if (s.equals("1") || s.equals("1.0")) s = "";
     return s;
   }
