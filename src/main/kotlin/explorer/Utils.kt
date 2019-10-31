@@ -1,4 +1,4 @@
-package com.adamratzman.explorer
+package explorer
 
 import com.adamratzman.qiukit.Qubit
 import com.adamratzman.qiukit.QubitAmplitude.delta

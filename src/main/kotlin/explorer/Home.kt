@@ -1,4 +1,9 @@
-package com.adamratzman.explorer
+package explorer
+
+import explorer.QuantumExplorer
+import explorer.getMap
+import explorer.handlebars
+import explorer.render
 
 fun QuantumExplorer.home() {
     spark.Spark.get("/") { _, _ ->

@@ -1,4 +1,4 @@
-package com.adamratzman.explorer
+package explorer
 
 import spark.Spark.get
 import spark.Spark.path

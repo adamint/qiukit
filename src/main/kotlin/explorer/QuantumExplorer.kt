@@ -1,8 +1,7 @@
-package com.adamratzman.explorer
+package explorer
 
 import com.github.jknack.handlebars.Handlebars
 import com.github.jknack.handlebars.Options
-import explorer.iqe
 import spark.Spark
 import spark.Spark.port
 import spark.staticfiles.StaticFilesConfiguration
