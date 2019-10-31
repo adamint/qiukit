@@ -10,7 +10,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine
 val handlebars = HandlebarsTemplateEngine()
 
 fun main() {
-    port(80)
+    port(getHerokuAssignedPort())
     val staticFileHandler = StaticFilesConfiguration()
     staticFileHandler.configure("/public")
 
@@ -94,4 +94,11 @@ internal fun getMap(pageTitle: String, pageId: String, positionBottom: Boolean):
             "Interactive Quantum Explorer"
 
     return map
+}
+
+fun getHerokuAssignedPort(): Int {
+    val processBuilder = ProcessBuilder()
+    return if (processBuilder.environment()["PORT"] != null) {
+        Integer.parseInt(processBuilder.environment()["PORT"])
+    } else 80 // return default port if heroku-port isn't set (i.e. on localhost)
 }
