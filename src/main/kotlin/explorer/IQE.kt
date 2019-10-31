@@ -32,7 +32,9 @@ val qubitConstants = listOf(
         "zero" to Qubit.getQubit(Qubit.State.ZERO),
         "one" to Qubit.getQubit(Qubit.State.ONE),
         "plus" to Qubit.getPlusQubit(),
-        "minus" to Qubit.getMinusQubit()
+        "minus" to Qubit.getMinusQubit(),
+        "plusY" to Qubit.getPlusYQubit(),
+        "minusY" to Qubit.getMinusYQubit()
 ).toMap()
 
 fun QuantumExplorer.iqe() {
@@ -46,15 +48,21 @@ fun QuantumExplorer.iqe() {
 
             map["operators"] = allowedOperators
             map["qubitConstants"] = qubitConstants.toList()
-                    .map { it.first to Pair(it.second.zero.toDiracString() + "|0⟩", it.second.one.toDiracString() + "|1⟩") }
+                    .map { it.first to "${if (it.second.zero.toDiracString() == "0" || it.second.zero.toDiracString() == null) "" else (it.second.zero.toDiracString() + "|0⟩")}${if(it.second.zero.toDiracString() != "0" && it.second.zero.toDiracString() != null && it.second.one.toDiracString() != "0" && it.second.one.toDiracString() != null && !it.second.one.toDiracString().trim().startsWith("-")) " +" else ""}${if (it.second.one.toDiracString() == "0" || it.second.one.toDiracString() == null) "" else it.second.one.toDiracString() + "|1⟩"}" }
             handlebars.render(map, "iqe.hbs")
         }
         get("/compute") { request, _ ->
             val map = getMap("","",false)
-            val initialQubit = qubitConstants.toList().first { it.first == request.queryParams("initial") }
+            val initialText = request.queryParams("initial")
+            val initialQubit = qubitConstants.toList().firstOrNull { it.first ==  initialText }
+                    ?: {
+                        val (zeroMagnitude, zeroTheta, oneMagnitude, oneTheta) = initialText.split(",").map { it.trim().replace(" ", "").replace("(", "").replace(")", "") }
+                                .map { it.toDouble() }
+                        "custom" to Qubit(QubitAmplitude(zeroMagnitude, zeroTheta), QubitAmplitude(oneMagnitude, oneTheta),Random())
+                    }.invoke()
             val gates = request.queryParams("gates").replace("|", "").split(" ").filter { it.isNotBlank() }.map { gateString ->
                 val splitByParams = gateString.removeSuffix(")").split("(")
-                val operator = operators.first { it.name == splitByParams.first() }
+                val operator = operators.first { it.name.equals(splitByParams.first(), true) }
                 val argument = splitByParams.getOrNull(1)?.replace("pi", Math.PI.toString())?.let {
                     try {
                         Expression(it).evaluate().toDouble()
@@ -79,7 +87,7 @@ fun QuantumExplorer.iqe() {
                         listOf((resultList.last().after as Qubit).toModel(-3).apply { gate = resultList.last().gate })
             map["finalResult"] = (finalResult as Qubit).toModel(-1)
             map["initial"] = initialQubit.second.toModel(1)
-map["circuit"] = "<b>${initialQubit.second.zero.toDiracString()}|0⟩ + ${initialQubit.second.one.toDiracString()}|1></b> " +
+map["circuit"] = "<b>${if (initialQubit.second.zero.toDiracString() == "0" || initialQubit.second.zero.toDiracString() == null) "" else (initialQubit.second.zero.toDiracString() + "|0⟩")}${if(initialQubit.second.zero.toDiracString() != "0" && initialQubit.second.zero.toDiracString() != null && initialQubit.second.one.toDiracString() != "0" && initialQubit.second.one.toDiracString() != null && !initialQubit.second.one.toDiracString().trim().startsWith("-")) " +" else ""}${if (initialQubit.second.one.toDiracString() == "0" || initialQubit.second.one.toDiracString() == null) "" else initialQubit.second.one.toDiracString() + "|1⟩"}</b> " +
         if (request.queryParams("gates").isNotEmpty()) " | " +
                 request.queryParams("gates").split(" ").joinToString(" ") else ""
             handlebars.render(map, "circuit-computation.hbs")
