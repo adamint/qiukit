@@ -7,14 +7,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Gate<E, T> extends Circuit {
-  List<Qubit> qubits;
-  private QubitOperator<Qubit, T> qubitOperator;
+  List<E> qubits;
+  private QubitOperator<E, T> qubitOperator;
 
-  public Gate(QubitOperator<Qubit, T> qubitOperator) {
+  public Gate(QubitOperator<E, T> qubitOperator) {
     this(Collections.emptyList(), qubitOperator);
   }
 
-  public Gate(List<Qubit> qubits, QubitOperator<Qubit, T> qubitOperator) {
+  public Gate(List<E> qubits, QubitOperator<E, T> qubitOperator) {
     super(new ArrayList<>());
     this.qubits = qubits;
     this.qubitOperator = qubitOperator;
@@ -24,7 +24,7 @@ public class Gate<E, T> extends Circuit {
   private ComputationalResult<E, T> invoke(E before) {
     T after = qubitOperator.apply(qubits);
 
-    return new ComputationalResult<>(before, after);
+    return new ComputationalResult<>(before, after, qubitOperator.getName());
   }
 
   @Override

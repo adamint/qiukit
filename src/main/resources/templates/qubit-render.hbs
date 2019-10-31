@@ -1,0 +1,18 @@
+<script type="application/javascript">
+    function generateWithFunction(r, theta, r1, theta1, element, id, title, func) {
+        $(document).ready(function () {
+            $.get("/environment/render?r=" + r + "&theta=" + theta + "&r1=" + r1 + "&theta1=" + theta1 + "&id=" + id, function (html) {
+                $("#" + element).html(html);
+                $("#" + element).prepend("<h3 class='bold uk-margin-small-top qubit-title'>" + title + "</h3>")
+                ;func();
+                ;$('#' + element).removeAttr('id');
+                ;$("#gen-div").removeAttr('id')
+            });
+        });
+        return "";
+    }
+
+    function generate(r, theta, r1, theta1, element, id, title) {
+        return generateWithFunction(r, theta, r1, theta1, element, id, title, function () {})
+    }
+</script>

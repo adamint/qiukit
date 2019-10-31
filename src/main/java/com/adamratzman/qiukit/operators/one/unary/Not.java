@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class Not extends QubitUnaryOperator<Qubit, Qubit> {
   public Not(Random random) {
-    super("Not", random);
+    super("Not", random, "qubit");
   }
 
   public Not() {
-    super("Not");
+    this(new Random());
   }
 
   @Override

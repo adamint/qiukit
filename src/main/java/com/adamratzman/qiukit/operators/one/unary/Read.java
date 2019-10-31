@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class Read extends QubitUnaryOperator<Qubit, Qubit> {
   public Read(Random random) {
-    super("Read", random);
+    super("Read", random, "qubit");
   }
 
   public Read() {
-    super("Read");
+    this(new Random());
   }
 
   @Override

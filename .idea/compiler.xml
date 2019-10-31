@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="Qiukit.quantumexplorer.main" target="1.8" />
+      <module name="Qiukit.quantumexplorer.test" target="1.8" />
       <module name="Qiukit.samples.main" target="1.8" />
       <module name="Qiukit.samples.test" target="1.8" />
     </bytecodeTargetLevel>

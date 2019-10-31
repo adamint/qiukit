@@ -1,0 +1,105 @@
+{{> header.hbs }}
+
+<div class="uk-margin-small-top uk-section uk-section-large uk-padding-remove-bottom">
+    <h2 class="moderate-bold uk-margin-remove-bottom uk-text-center">Interactive Quantum Environment</h2>
+    <p class="light uk-margin-small-top uk-text-center">See what
+        <a class="bold" href="#gates-modal" uk-toggle>gates</a>
+        and
+        <a class="bold" href="#constants-modal" uk-toggle>constants</a>
+        are available</p>
+
+    <div id="input" class="uk-width-1-2 uk-margin-auto">
+        <div class="uk-margin-small-bottom">
+            <p class="uk-inline uk-margin-small-right uk-margin-auto-vertical"><b>Gates</b> (Space Separated)</p>
+            <input id="gates" type="text" placeholder="Type a list of gates here..."
+                   class="uk-input uk-width-2-3 uk-margin-small-right uk-margin-small-bottom">
+            <p class="uk-inline uk-margin-small-right uk-margin-auto-vertical"><b><a href="#constants-modal" uk-toggle>Initial
+                Input</a></b> (qubit)</p>
+            <input style="margin-left: 42px" id="initial" type="text" placeholder="Initial input..."
+                   class="uk-input uk-width-1-4 uk-margin-small-right">
+            <button style="margin-left: 255px" class="uk-button uk-button-primary uk-width-auto" onclick="post()">Go
+            </button>
+        </div>
+
+        <br/>
+        <button name="Clear" class="uk-button uk-button-primary" onclick="clearOutput();">Clear Output</button>
+
+        <div id="output"></div>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+<div id="gates-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Available Gates</h2>
+        <ul class="uk-list uk-list-bullet">
+            {{#each operators}}
+                <li><b>{{name}}</b>
+                    <br/>{{name}}{{invocationDescription}}</li>
+            {{/each}}
+        </ul>
+
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-primary uk-modal-close" type="button">OK</button>
+        </p>
+    </div>
+</div>
+
+<div id="constants-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Available Constants</h2>
+        <ul class="uk-list uk-list-bullet">
+            {{#each qubitConstants}}
+                <li><b>{{first}}</b>: {{second.first}}  +  {{second.second}}</li>
+            {{/each}}
+            <li><b>pi</b>: 3.1415...</li>
+        </ul>
+
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-primary uk-modal-close" type="button">OK</button>
+        </p>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+{{> qubit-render.hbs }}
+
+<script>
+    function evalJson(jsArray){ eval("function x(){ "+ jsArray +" }"); return x(); }
+
+    function clearOutput() {
+        $("#output").empty()
+    }
+
+    $("#expression").keypress(function (key) {
+        if (key.which === 13) post()
+    });
+
+    function post() {
+        var initial = $("#initial").val();
+        var gates = $("#gates").val();
+
+
+        $.get("/environment/compute", {
+                    initial: initial,
+                    gates: gates
+                },
+                function (data) {
+                    $("#initial").val("");
+                    $("#gates").val("");
+                    console.log(data)
+                    var data = $(data);
+                    $("#output").prepend(data);
+                    evalJson(data.find("script").text());
+                    $("canvas").removeAttr('id')
+                })
+    }
+</script>
+
+{{> footer.hbs }}

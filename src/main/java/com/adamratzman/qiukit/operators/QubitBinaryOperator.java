@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class QubitBinaryOperator<A, B, C> extends QubitOperator<Pair<A, B>, C> {
-  public QubitBinaryOperator(String name, Random random) {
-    super(name, random);
+  public QubitBinaryOperator(String name, Random random, String invocationDescription) {
+    super(name, random, invocationDescription);
   }
 
-  public QubitBinaryOperator(String name) {
-    this(name, new Random());
+  public QubitBinaryOperator(String name, String invocationDescription) {
+    this(name, new Random(), invocationDescription);
   }
 
   @Override

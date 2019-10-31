@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class SPhase extends QubitUnaryOperator<Qubit, Qubit> {
   public SPhase(Random random) {
-    super("S", random);
+    super("S", random, "qubit");
   }
 
   public SPhase() {
-    super("S");
+    this(new Random());
   }
 
   @Override

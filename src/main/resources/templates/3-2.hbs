@@ -1,0 +1,44 @@
+{{> header.hbs }}
+
+<div>
+    <div class="uk-margin-small-top uk-section uk-section-large">
+        <div class="">
+            <h3 class="moderate-bold uk-text-center">Read Gate</h3>
+            <p class="uk-text-center">See <a class="rem-1" href="/campaigns">all campaigns →</a></p>
+            <div class="uk-margin-small-top" style="margin-left: 30%; margin-right: 30%">
+                {{> qubit-render.hbs }}
+
+                <h4 class="uk-margin-small-top">
+                    Like with conventional bits, when we read a qubit, we see either <b>0</b> or <b>1</b>.</h4>
+                <h4 class="uk-margin-small-top">The likelihood
+                    that we'll read <b>0</b> is given by the probability above the <b>0</b> circle, and same for <b>1</b>.
+                </h4>
+                <div class="uk-margin-medium-top" id="gen-1"></div>
+
+                <h4 class="uk-margin-small-top">
+                    This qubit will always return 0 because the 0 probability is 100%.
+                </h4>
+
+                <div class="uk-margin-medium-top" id="gen-2"></div>
+
+                <h4 class="uk-margin-small-top">
+                    This qubit is in a superposition where the probability of reading a 0 or 1 is 50%, respectively. So,
+                    if we measure it, we're equally likely to see a 0 or 1. Note that the phase of the qubit <i>does not affect</i>
+                    the probability.
+                </h4>
+
+                <div class="uk-margin-medium-top" id="gen-3"></div>
+                <h4 class="uk-margin-small-top">
+                    This qubit is in a superposition where the probability of reading a 0 is 84% and the probability of reading
+                    a 1 is 16%. If we read this qubit, we're more likely to see a 0, but we could also see a 1. It's random!
+                </h4>
+
+                <script>generate(1, 0, 0, 0, "gen-1", 0, "What will this qubit always return?")</script>
+                <script>generate(1 / Math.sqrt(2), 0, 1 / Math.sqrt(2), 1.57, "gen-2",1, "What will this qubit return?")</script>
+                <script>generate(Math.sqrt(0.84), 0, Math.sqrt(0.16), Math.PI * 3 / 7, "gen-3",2, "What will this qubit return?")</script>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> footer.hbs }}

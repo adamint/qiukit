@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class PauliZ extends QubitUnaryOperator<Qubit, Qubit> {
   public PauliZ(Random random) {
-    super("Z", random);
+    super("Z", random, "qubit");
   }
 
   public PauliZ() {
-    super("Z");
+    this(new Random());
   }
 
   @Override

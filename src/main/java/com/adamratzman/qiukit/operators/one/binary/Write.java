@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class Write extends QubitBinaryOperator<Qubit, Qubit.State, Qubit> {
   public Write(Random random) {
-    super("Write", random);
+    super("Write", random, "(zero or one)");
   }
 
   public Write() {
-    super("Write");
+    this(new Random());
   }
 
   @Override

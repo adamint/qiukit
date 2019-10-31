@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class RootOfNot extends QubitUnaryOperator<Qubit, Qubit> {
   public RootOfNot(Random random) {
-    super("RootOfNot", random);
+    super("RootOfNot", random, "qubit");
   }
 
   public RootOfNot() {
-    super("RootOfNot");
+    this(new Random());
   }
 
   @Override

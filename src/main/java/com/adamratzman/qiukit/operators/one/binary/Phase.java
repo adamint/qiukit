@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class Phase extends QubitBinaryOperator<Qubit, Double, Qubit> {
   public Phase(Random random) {
-    super("R", random);
+    super("Phase", random, "(radians)");
   }
 
   public Phase() {
-    super("Phase");
+    this(new Random());
   }
 
   @Override

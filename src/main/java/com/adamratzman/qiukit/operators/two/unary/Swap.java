@@ -20,11 +20,11 @@ public class Swap extends QubitUnaryOperator<Pair<Qubit, Qubit>, Pair<Qubit, Qub
   );
 
   public Swap(Random random) {
-    super("Swap", random);
+    super("Swap", random, "firstQubit, secondQubit");
   }
 
   public Swap() {
-    super("Swap");
+    this(new Random());
   }
 
   @Override

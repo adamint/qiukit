@@ -1,0 +1,8 @@
+<div>
+    <div id="gen"></div>
+    <script>generateWithFunction({{finalResult.zero.sqrtProbability}}, {{finalResult.zero.phase}}, {{finalResult.one.sqrtProbability}}, {{finalResult.one.phase}}, "gen", -1, "{{&circuit}}",
+            function () {
+                $("#gen").append('<ul uk-accordion="" class="uk-accordion"><li><h3 class="uk-width-1-3 uk-accordion-title">' + '<a class="black" href="#">See Intermediate Steps</a>' + '</h3>' + '<div class="uk-accordion-content" aria-hidden="true" hidden="">' + '{{#unless afterResults}}{{/unless}}{{#each afterResults}}<div id="gen-{{@index}}"></div>' +generate({{zero.sqrtProbability}}, {{zero.phase}}, {{one.sqrtProbability}}, {{one.phase}}, "gen-{{@index}}", {{@index}}, "{{#if first}}Initial Qubit{{/if}}{{#if gate}}Apply {{gate}} gate{{/if}}") + '{{/each}}</div></li> </ul>');
+                $(".qubit-title").css("border-top", "solid");
+            })</script>
+</div>

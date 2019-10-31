@@ -1,0 +1,96 @@
+<div id="generated">
+    <div class="generated-content">
+        <!-- Generated -->
+
+        <div id="gen-div" class="uk-margin-auto uk-text-center">
+            <div class="">
+                {{#with qubit}}
+                    <div class=" uk-inline">
+                        <canvas class="uk-margin-auto uk-text-center" height="300px" width="475px" style="border:1px solid #d3d3d3;"
+                                id="qubit-{{id}}"></canvas>
+                    </div>
+                    <script>
+                        function draw_rectangle(x, y, w, h, deg, ctx) {
+                            ctx.save();
+                            ctx.translate(x, y);
+                            ctx.rotate(degrees_to_radians(deg + 90));
+                            ctx.fillStyle = "#1E90FF";
+                            ctx.fillRect(-1 * w, -1 * h, w, h);
+                            ctx.restore();
+                        }
+
+                        function degrees_to_radians(degrees) {
+                            return degrees * Math.PI / 180;
+                        }
+
+                        function radians_to_degrees(radians) {
+                            return radians * 180 / Math.PI;
+                        }
+
+                        var canvas = document.getElementById('qubit-{{id}}');
+                        if (canvas.getContext) {
+                            var ctx = canvas.getContext('2d');
+                            ctx.font = '28px serif';
+                            ctx.beginPath();
+                            ctx.arc(125, 150, 100, 0, 360, false);
+                            ctx.stroke();
+
+                            var zeroSqrtProbability = {{zero.sqrtProbability}};
+                            ctx.beginPath();
+                            ctx.arc(125, 150, 100 * zeroSqrtProbability, 0, 360, false);
+                            ctx.fillStyle = "#87CEFA";
+                            ctx.fill();
+
+                            draw_rectangle(125, 150, 2, 100, radians_to_degrees({{zero.phase}} +Math.PI * 3 / 2), ctx);
+
+                            ctx.fillStyle = "black";
+                            ctx.fillText({{zero.probability}} * 100 + '%', 125/2 + 40, 35);
+                            var text = "";
+                            if ({{zero.hasReal}}) text += {{zero.real}};
+                            if ({{zero.hasImaginary}}) {
+                                if (text.length > 0 && {{zero.imaginary}} > 0) text += "+";
+                                text += {{zero.imaginary}} + "i"
+                            }
+                            if (text === "1") text = ""
+
+                            ctx.fillText(text + " |0⟩", 125/2 + 10, 280)
+
+
+
+                            // 1
+
+                            ctx.beginPath();
+                            ctx.arc(125 + 220, 150, 100, 0, 360, false);
+                            ctx.stroke();
+
+                            var oneSqrtProbability = {{one.sqrtProbability}};
+                            ctx.beginPath();
+                            ctx.arc(125 + 220, 150, 100 * oneSqrtProbability, 0, 360, false);
+                            ctx.fillStyle = "#87CEFA";
+                            ctx.fill();
+
+                            draw_rectangle(125 + 220, 150, 2, 100, radians_to_degrees({{one.phase}} +Math.PI * 3 / 2), ctx);
+
+                            ctx.fillStyle = "black";
+                            ctx.fillText({{one.probability}} * 100 + '%', 125/2 + 40 + 220, 35);
+                            var text = "";
+                            if ({{one.hasReal}}) text += {{zero.real}};
+                            if ({{one.hasImaginary}}) {
+                                if (text.length > 0 && {{one.imaginary}} > 0) text += "+";
+                                text += {{one.imaginary}} + "i"
+                            }
+                            if (text === "1") text = ""
+
+                            ctx.font = '28px serif';
+                            ctx.fillText(text + " |1⟩", 125/2 + 10 + 200, 280)
+
+                        }
+                    </script>
+                    <br/>
+                    <br/>
+                {{/with}}
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{{> header.hbs }}
+
+<div>
+    <div class="uk-margin-small-top uk-section uk-section-large">
+        <div class="uk-text-center">
+            <h3 class="light">Integral Rule | {{integral.readable}}</h3>
+            <p>See <a class="rem-1" href="/integrals/">all rules →</a></p>
+
+            <div id="integral"  class="uk-margin-medium-top">
+                $$ \int {{integral.before}} dx = {{integral.after}} + C $$
+
+                {{#if integral.note}}
+                    <p><i>Note: </i> {{integral.note}}</p>
+                {{/if}}
+
+                {{> problem-script.hbs }}
+
+                <br />
+                <div class="uk-margin-large-top" id="gen-prb"></div>
+
+                <script>generate({{& generator-type}}, "gen-prb", "Test Yourself")</script>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> footer.hbs }}

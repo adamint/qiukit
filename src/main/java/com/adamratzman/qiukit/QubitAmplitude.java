@@ -17,7 +17,7 @@ public class QubitAmplitude {
     }
     else {
       this.sqrtProbability = -sqrtProbability;
-      this.theta = theta + Math.PI;
+      this.theta = theta - Math.PI;
     }
 
     while (this.theta > Math.PI && !MathUtils.equals(this.theta, Math.PI, delta)) this.theta -= 2 * Math.PI;
@@ -60,6 +60,19 @@ public class QubitAmplitude {
       return MathUtils.equals(sqrtProbability, otherAmplitude.getSqrtProbability(), delta)
               && MathUtils.equals(getAngle(), otherAmplitude.getAngle(), delta);
     } else return false;
+  }
+
+  public String toDiracString() {
+    Complex complex = getComplex();
+    String s = "";
+    if (!MathUtils.equals(complex.getReal(), 0, delta)) s += complex.getReal();
+    if (!MathUtils.equals(complex.getImaginary(), 0, delta)) {
+      if (!s.isEmpty() && complex.getImaginary() > 0) s += " +";
+      if (!s.isEmpty()) s += " ";
+      s += complex.getImaginary() + "i";
+    }
+    if (s.equals("1") || s.equals("1.0")) s = "";
+    return s;
   }
 
   @Override

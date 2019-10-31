@@ -17,11 +17,11 @@ public class Hadamard extends QubitUnaryOperator<Qubit, Qubit> {
   );
 
   public Hadamard(Random random) {
-    super("Hadamard", random);
+    super("Hadamard", random, "qubit");
   }
 
   public Hadamard() {
-    super("Hadamard");
+    this(new Random());
   }
 
   @Override

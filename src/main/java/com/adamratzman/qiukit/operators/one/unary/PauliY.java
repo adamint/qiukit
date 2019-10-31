@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class PauliY extends QubitUnaryOperator<Qubit, Qubit> {
   public PauliY(Random random) {
-    super("Y", random);
+    super("Y", random, "qubit");
   }
 
   public PauliY() {
-    super("Y");
+    this(new Random());
   }
 
   @Override

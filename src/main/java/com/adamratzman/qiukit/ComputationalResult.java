@@ -3,10 +3,12 @@ package com.adamratzman.qiukit;
 public class ComputationalResult <A, B> {
   private A before;
   private B after;
+  private String gate;
 
-  public ComputationalResult(A before, B after) {
+  public ComputationalResult(A before, B after, String gate) {
     this.before = before;
     this.after = after;
+    this.gate = gate;
   }
 
   public A getBefore() {
@@ -15,6 +17,10 @@ public class ComputationalResult <A, B> {
 
   public B getAfter() {
     return after;
+  }
+
+  public String getGate() {
+    return gate;
   }
 
   @Override
