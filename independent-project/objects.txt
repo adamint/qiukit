@@ -1,0 +1,91 @@
+Objects
+
+Null : Object
+- toBoolean = false
+
+Any : Object
+
+Number : Any
+- Types:
+    - Integer
+    - Decimal
+    - Infinity
+    - NaN
+- Fields:
+    - number: BigDecimal
+- Number + String, String + Number = StringN
+- Equality (obj Object): obj is Number & obj !is Char & obj.number == number
+
+Boolean : Any
+- Types:
+    - True
+    - False
+- Fields:
+    - boolean: Boolean
+- Operations:
+    - Boolean + Boolean = Boolean & Boolean
+    - Boolean - Boolean = Boolean | Boolean
+- Equality (obj Object): (obj is Boolean & obj.boolean == boolean)  | obj.toBoolean() == boolean
+- toBoolean: boolean
+
+Char : Number
+- Overrides toString
+- Char + number, number + Char = Char
+- Otherwise, acts like a number
+- Char * n : Integer = String of n chars
+- Equality (obj Object): obj is Char & obj.number == number
+- toBoolean = number != -1
+
+List<A> : Sequence<A>
+- Fields:
+    - A : A
+- Equality (obj Object): obj is List & A is obj.A 
+- Can be created with form [A,B, C]
+	
+String : List<Char>
+
+A Sequence<E : Any>
+- Mutability:
+    - Mutable
+    - Immutable
+- A Values (java.util.List) 
+- Strictness:
+    - Bounded (only of same type, allows subclasses)
+    - Strict bounded (only of same type, no subclasses)
+    - No bound
+- Operations:
+    - List + Any = List
+    - List - Integer removes the element at that index
+    - List * Integer appends List values to List Integer - 1 times
+    - List<Number> * Decimal multiplies all elements in list by decimal. If Number is Integer, converts list to List<Decimal>
+    - List / Number (Type=Integer or Decimal) divides all numbers in List by Number
+
+Variable : Any
+- Fields:
+    - Name : Keyword
+    - Value: Object
+
+InfiteSequence<A> : Sequence<A>
+- Mutability: Immutable
+- Strictness: Bounded
+- Fields:
+    - Generator Sequence (generatorSequence): java.util.sequence<T>, OR
+    - Generator Function (generatorFunction): (Int (index), List<T>) -> T
+    - Initial values (initialValues): List<T>(Mutability=True)
+- Equality (obj Object): generatorFunction == obj.generatorFunction & generatorSequence == obj.generatorSequence & initialValues == obj.initialValues
+
+
+Truthiness:
+- True and false exist (as Booleans), but any value can be truthy or false
+- Truthy = Not falsy
+- False: false, 0, “”, ‘’, null, NaN, Infinity
+
+Object:
+- Methods:
+    - toString = className
+    - equals
+    - toBoolean = true
+    - evaluate
+
+‘a*6  = “aaaaaa”
+

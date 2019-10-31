@@ -1,0 +1,37 @@
+Operators
+
++ (plus)
+- (minus)
+_ (unary minus)
+~ (unary not) 
+/ (division)
+* (multiplication)
+^ (exponent)
+% (modulus)
+x (XOR)
+a (logical and)
+o (logical or)
+& (and)
+| (or)
+
+
+
+Numbers (0-15)
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+C
+D
+E
+F
+
+Variable names must be single characters and either a lower or upper-case letter not reserved.

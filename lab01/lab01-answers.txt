@@ -1,0 +1,84 @@
+R1.7:
+39 + 3
+42
+
+R1.8
+HelloWorld
+
+R1.9
+System.out.println only accepts one argument. It is not variadic.
+
+E1.8
+class Two {
+    public static void main(String[] args) {
+        System.out.println("//////////////////");
+        System.out.println(" ——---————---");
+        System.out.println(" +          +");
+        System.out.println("(|  O    O  |)");
+        System.out.println(" |   ‘  ‘   |");
+        System.out.println(" |    -     |");
+        System.out.println(" |———-----——|");
+    }
+}
+E1.15
+import javax.swing.JOptionPane;
+
+public class DialogViewer {
+    public static void main(String[] args) {
+        JOptionPane.showMessageDialog(null, "Hello, Adam!");
+    }
+}
+E1.16
+import javax.swing.JOptionPane;
+
+public class DialogViewer {
+    public static void main(String[] args) {
+        String name = JOptionPane.showInputDialog("What is your name?");
+        JOptionPane.showMessageDialog(null, "Hello, " + name + "!");
+    }
+}
+E1.17
+import javax.swing.JOptionPane;
+
+public class DialogViewer {
+    public static void main(String[] args) {
+        String name = JOptionPane.showInputDialog("What is your name?");
+        JOptionPane.showInputDialog("My name is Hal! What would you like me to do?");
+        JOptionPane.showMessageDialog(null, "I'm sorry, " + name + ". I'm afraid I can't do that");
+    }
+}
+E1.18
+import javax.swing.JOptionPane;
+import java.net.URL;
+
+public class Test {
+    public static void main(String[] args) throws Exception {
+        URL imageLocation = new URL(
+                "https://ih1.redbubble.net/image.704045288.7734/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u6.jpg"
+        );
+        JOptionPane.showMessageDialog(null, "What's up", "Different title", JOptionPane.PLAIN_MESSAGE, new ImageIcon(imageLocation));
+    }
+}
+R2.5
+The value of mystery is 0
+R2.6
+the variable "mystery" has already been declared in that scope and cannot be redeclared in that scope.
+
+BigDecimal program:
+import java.math.BigDecimal;
+
+public class BigDecimalCalculations {
+    public static void main(String[] args) {
+        BigDecimal a = new BigDecimal("1");
+        BigDecimal b = new BigDecimal("2");
+        BigDecimal c = new BigDecimal("3");
+        BigDecimal d = new BigDecimal("4");
+        BigDecimal e = new BigDecimal("5");
+
+        System.out.println(a.add(b));
+        System.out.println(b.multiply(c));
+        System.out.println(a.subtract(b.subtract(c.subtract(d))));
+        System.out.println(a.subtract(b).subtract(c).subtract(d));
+        System.out.println(b.multiply(c).subtract(d.multiply(e)));
+    }
+}
